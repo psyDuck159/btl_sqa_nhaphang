@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,6 +30,7 @@ public class ImportOrder {
 	private int id;
 	@Column(unique = true, nullable = false, length = 45)
 	private String code;
+	@CreationTimestamp
 	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
 	private Timestamp date;
 	@ManyToOne
@@ -51,7 +54,6 @@ public class ImportOrder {
 	}
 	
 	public ImportOrder() {
-		this.date = new Timestamp(System.currentTimeMillis());
 		this.code = UUID.randomUUID().toString();
 	}
 
