@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     // get detail product
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable int id){
         Optional<Product> foundProduct = repository.findById(id);
         if(foundProduct.isPresent()){
