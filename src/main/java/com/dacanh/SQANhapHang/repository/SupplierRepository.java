@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 import com.dacanh.SQANhapHang.model.Supplier;
 
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
-	
+    List<Supplier> findByName(String name);
 }

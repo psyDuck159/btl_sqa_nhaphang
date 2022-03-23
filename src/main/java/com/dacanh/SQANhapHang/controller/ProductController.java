@@ -21,7 +21,7 @@ import com.dacanh.SQANhapHang.repository.ProductRepository;
 import com.dacanh.SQANhapHang.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/product")
+@RequestMapping(path = "/api")
 public class ProductController {
 
     @Autowired
@@ -30,13 +30,13 @@ public class ProductController {
     private ProductService productService;
 
     // get list products
-    @GetMapping("/lists")
+    @GetMapping("/product/lists")
     List<Product> getAllProduct(){
         return repository.findAll();
     }
 
     // get detail product
-    @GetMapping("/detail/{id}")
+    @GetMapping("/product/detail/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable int id){
         Optional<Product> foundProduct = repository.findById(id);
         if(foundProduct.isPresent()){
@@ -52,14 +52,14 @@ public class ProductController {
     }
 
     //insert product
-    @PostMapping("/create")
+    @PostMapping("/product/create")
     ResponseEntity<ResponseObject> insertProduct(@RequestBody Product newProduct){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("ok", "Insert product successfully", repository.save(newProduct))
         );
     }
 
-    @PutMapping("/{id}/edit")
+    @PutMapping("/product/{id}/edit")
     ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable int id){
         Product updatedProduct = repository.findById(id).map(product -> {
             product.setPrice(newProduct.getPrice());
@@ -79,7 +79,7 @@ public class ProductController {
     }
 
     //delete product
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/product/{id}/delete")
     ResponseEntity<ResponseObject> deleteProduct(@PathVariable int id){
         boolean existed = repository.existsById(id);
         if (existed){
