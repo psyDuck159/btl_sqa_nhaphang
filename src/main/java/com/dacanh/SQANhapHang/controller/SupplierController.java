@@ -1,5 +1,6 @@
 package com.dacanh.SQANhapHang.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class SupplierController {
 	private SupplierRepository supplierRepository;
 	@Autowired
 	private SupplierService supplierService;
+
+	@GetMapping("/suppliers")
+	public ResponseEntity<ResponseObject> getSuppliers(){
+		return ResponseEntity.ok().body(supplierService.getSuppliers());
+	}
 	
 	@GetMapping("/supplier/{id}")
 	public ResponseEntity<ResponseObject> getSupplier(@PathVariable int id) {

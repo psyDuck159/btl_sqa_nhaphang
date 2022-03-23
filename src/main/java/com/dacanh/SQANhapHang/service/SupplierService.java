@@ -16,6 +16,11 @@ import com.dacanh.SQANhapHang.repository.SupplierRepository;
 public class SupplierService {
 	@Autowired
 	private SupplierRepository supplierRepository;
+
+	public ResponseObject getSuppliers() {
+		log.info("Fetching all supplier");
+		return new ResponseObject("ok", "get all supplier successfully", supplierRepository.findAll());
+	}
 	
 	public ResponseObject getSupplierByProduct(int id) {
 		SupplierDao supplierDao = new SupplierDao();
