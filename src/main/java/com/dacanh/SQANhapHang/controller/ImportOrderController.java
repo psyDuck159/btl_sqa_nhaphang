@@ -5,11 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.dacanh.SQANhapHang.dto.ResponseObject;
 import com.dacanh.SQANhapHang.model.ImportOrder;
@@ -18,6 +14,7 @@ import com.dacanh.SQANhapHang.service.ImportOrderService;
 
 @RestController
 @EnableTransactionManagement
+@RequestMapping("/api")
 public class ImportOrderController {
 	@Autowired
 	private ImportOrderService importOrderService;

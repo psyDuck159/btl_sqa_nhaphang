@@ -21,7 +21,7 @@ import com.dacanh.SQANhapHang.repository.ProductRepository;
 import com.dacanh.SQANhapHang.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/product")
+@RequestMapping(path = "/api/product")
 public class ProductController {
 
     @Autowired
