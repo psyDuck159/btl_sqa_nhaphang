@@ -24,7 +24,10 @@ public class SupplierDao extends DAO {
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Supplier supplier = new Supplier(rs.getString("name"), rs.getString("address"), rs.getString("tel"));
+				Supplier supplier = new Supplier(
+						rs.getString("name"),
+						rs.getString("address"),
+						rs.getString("tel"));
 				supplier.setId(rs.getInt("id"));
 				list.add(supplier);
 			}

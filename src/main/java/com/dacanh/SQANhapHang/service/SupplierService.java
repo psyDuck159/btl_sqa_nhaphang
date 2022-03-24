@@ -38,7 +38,9 @@ public class SupplierService {
 		}
 		else{
 			log.info("Save Supplier successfully");
-			return new ResponseObject("ok", "Save supplier successfully", supplierRepository.save(supplier));
+			return new ResponseObject("ok",
+					"Save supplier successfully",
+					supplierRepository.save(supplier));
 		}
 	}
 }
