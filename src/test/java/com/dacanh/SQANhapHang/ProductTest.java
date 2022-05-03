@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertNotEquals;
+
 @SpringBootTest
 public class ProductTest extends TestCase{
 
@@ -91,4 +93,35 @@ public class ProductTest extends TestCase{
         assertEquals(product.getName(), result.getName());
     }
 
+    @Test
+    @Transactional
+    public void testUpdatePriceIs0(){
+        Product p = (Product) productController.findById(49).getBody().getData();
+        Product product = new Product("name", 0, "a", "b", "c", "d");
+        Product result = (Product) productController.updateProduct(product, 49).getBody().getData();
+        assertEquals(p.getPrice(), result.getPrice());
+    }
+
+    @Test
+    @Transactional
+    public void testUpdatePriceIsNegativeValue(){
+        Product p = (Product) productController.findById(49).getBody().getData();
+        Product product = new Product("name", -5, "a", "b", "c", "d");
+        Product result = (Product) productController.updateProduct(product, 49).getBody().getData();
+        assertEquals(p.getPrice(), result.getPrice());
+    }
+
+    @Test
+    @Transactional
+    public void testDeletedProductSuccess(){
+        String mess = productController.deleteProduct(49).getBody().getMessage();
+        assertEquals("Delete product successfully", mess);
+    }
+
+    @Test
+    @Transactional
+    public void testDeletedProductFail(){
+        String mess = productController.deleteProduct(50).getBody().getMessage();
+        assertEquals("Cannot find product to delete", mess);
+    }
 }
