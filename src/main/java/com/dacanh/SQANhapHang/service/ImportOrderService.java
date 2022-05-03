@@ -50,7 +50,7 @@ public class ImportOrderService {
 	public ResponseObject getImportOrder(int id) {
 		ImportOrder importOrder = importOrderRepository.findById(id).orElse(null);
 		if(importOrder == null) {
-			return new ResponseObject("failed", "Cannot get order " + id, "");
+			return new ResponseObject("failed", "Cannot get order " + id, null);
 		}
 		List<ImportedProduct> importedProducts = importedProductRepository.findImportedProductOf(id);
 		for (ImportedProduct ip : importedProducts) {

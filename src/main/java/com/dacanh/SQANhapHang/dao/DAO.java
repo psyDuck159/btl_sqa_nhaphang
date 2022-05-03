@@ -12,8 +12,8 @@ public class DAO {
 	 
 	           try {
 	               Class.forName(dbClass);
-	               con = DriverManager.getConnection (dbUrl, "sonht",
-						   "htson2000");
+	               con = DriverManager.getConnection (dbUrl, "root",
+						   "CNPM@2021");
 	           }catch(Exception e) {
 	               e.printStackTrace();
 	           }
