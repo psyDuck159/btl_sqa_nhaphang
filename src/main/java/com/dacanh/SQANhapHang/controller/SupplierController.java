@@ -42,7 +42,7 @@ public class SupplierController {
 	}
 
 	@PostMapping("/supplier/save")
-	ResponseEntity<ResponseObject> saveSupplier(@RequestBody Supplier newSupplier){
+	public ResponseEntity<ResponseObject> saveSupplier(@RequestBody Supplier newSupplier){
 		return ResponseEntity.status(HttpStatus.OK).body(supplierService.saveSupplier(newSupplier));
 	}
 	
