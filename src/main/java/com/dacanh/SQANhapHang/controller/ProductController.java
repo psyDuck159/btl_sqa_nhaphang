@@ -31,36 +31,36 @@ public class ProductController {
 
     // get list products
     @GetMapping("/product/lists")
-    List<Product> getAllProduct(){
+    public List<Product> getAllProduct(){
         return repository.findAll();
     }
 
     // get detail product
     @GetMapping("/product/detail/{id}")
-    ResponseEntity<ResponseObject> findById(@PathVariable int id){
-        Optional<Product> foundProduct = repository.findById(id);
-        if(foundProduct.isPresent()){
+    public ResponseEntity<ResponseObject> findById(@PathVariable int id){
+        Product foundProduct = repository.findById(id).orElse(null);
+        if(foundProduct != null){
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponseObject("ok", "Query product successfully", foundProduct)
             );
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new ResponseObject("false", "Cannot find product with id = "+id, "")
+                    new ResponseObject("false", "Cannot find product with id = "+id, null)
             );
         }
     }
 
     //insert product
     @PostMapping("/product/create")
-    ResponseEntity<ResponseObject> insertProduct(@RequestBody Product newProduct){
+    public ResponseEntity<ResponseObject> insertProduct(@RequestBody Product newProduct){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("ok", "Insert product successfully", repository.save(newProduct))
         );
     }
 
     @PutMapping("/product/{id}/edit")
-    ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable int id){
+    public ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable int id){
         Product updatedProduct = repository.findById(id).map(product -> {
             product.setPrice(newProduct.getPrice());
             product.setName(newProduct.getName());
@@ -80,7 +80,7 @@ public class ProductController {
 
     //delete product
     @DeleteMapping("/product/{id}/delete")
-    ResponseEntity<ResponseObject> deleteProduct(@PathVariable int id){
+    public ResponseEntity<ResponseObject> deleteProduct(@PathVariable int id){
         boolean existed = repository.existsById(id);
         if (existed){
             repository.deleteById(id);
